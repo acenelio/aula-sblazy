@@ -6,9 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.devsuperior.demolazy.dto.EmployeeDTO;
+import com.devsuperior.demolazy.util.Convertible;
+
 @Entity
 @Table(name = "tb_employee")
-public class Employee {
+public class Employee implements Convertible<EmployeeDTO> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,5 +41,10 @@ public class Employee {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+ 
+	@Override
+	public EmployeeDTO convert() {
+		return new EmployeeDTO(this);
 	}
 }
